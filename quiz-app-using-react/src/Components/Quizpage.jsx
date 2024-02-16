@@ -1,22 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './HomePage.css';
+import resources from './resources/quizQuestion';
 
 function Quiz() {
+  const [state, setState] = useState(0);
+  function next() {
+    if (state == 14) {
+      setState(0);
+      console.log('vamsi');
+    } else {
+      setState(state + 1);
+    }
+  }
+  function prev() {
+    if (state == 0) {
+      setState(14);
+      console.log('Jatin');
+    } else {
+      setState(state - 1);
+    }
+  }
   return (
     <div className="quizpg">
       <div className="maindiv">
         <h2>Question</h2>
-        <p>Which is the only mammal that can jump?</p>
+        <p>{resources[state].question}</p>
         <div className="btnsdiv">
-          <button className="btn1">Dog</button>
-          <button className="btn2">Elephant</button>
-          <button className="btn3">Goat</button>
-          <button className="btn4">Lion</button>
+          <button className="btn1">{resources[state].optionA}</button>
+          <button className="btn2">{resources[state].optionB}</button>
+          <button className="btn3">{resources[state].optionC}</button>
+          <button className="btn4">{resources[state].optionD}</button>
         </div>
         <div className="Finalbtns">
-          <button className='Preview'>Previous</button>
-          <button className='Next'>Next</button>
-          <button className='Quit'>Quit</button>
+          <button className="Preview" onClick={prev}>
+            Previous
+          </button>
+          <button className="Next" onClick={next}>
+            Next
+          </button>
+          <button
+            className="Quit"
+            onClick={() => alert('Hey!!Are you sure to quit?')}
+          >
+            Quit
+          </button>
         </div>
       </div>
     </div>
